@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - "web1"
+    ports:
+      - "80:80"
+
+  web1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "81:80"

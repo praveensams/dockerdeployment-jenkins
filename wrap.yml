@@ -1,0 +1,5 @@
+- hosts: node01
+  become: true
+
+  roles:
+    - "apache"

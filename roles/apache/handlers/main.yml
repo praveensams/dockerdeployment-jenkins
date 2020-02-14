@@ -1,0 +1,7 @@
+---
+# handlers file for apache
+#
+- name: starting
+  service:
+    name: "httpd"
+    state: "started"

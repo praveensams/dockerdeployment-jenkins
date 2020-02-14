@@ -1,0 +1,33 @@
+---
+# tasks file for apache
+- name: package installation 
+  yum:
+    name: ['httpd','httpd-tools']
+    state: installed
+
+- name: service template
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: starting
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: fiding ip 
+  shell: |
+          ip a 
+  register: result
+  delegate_to: localhost
+
+
+- name: debugging
+  debug:
+    msg: "{{ result.stdout }}"
+
+- name: service restart
+  service:
+    name: "httpd"
+    state: restarted
+  tags: restart
